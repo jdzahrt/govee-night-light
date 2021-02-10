@@ -8,7 +8,7 @@
 
 
 
-### Deploy Python Lambda functions with .zip file [aws doc here](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html)[)
+### Deploy Python Lambda functions with .zip file [aws doc here](https://docs.aws.amazon.com/lambda/latest/dg/python-package.html)
 ```
 pip install --target ./package requests
 
