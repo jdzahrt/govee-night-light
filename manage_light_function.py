@@ -17,6 +17,11 @@ def lambda_handler(event, context):
     event_time = datetime.strptime(event['time'], '%Y-%m-%dT%H:%M:%SZ').time()
 
     morning = datetime.strptime('12:30:00', '%H:%M:%S').time()
+
+    morning_off_time = datetime.strptime('14:30:00', '%H:%M:%S').time()
+
+    night_on_time = datetime.strptime('00:00:00', '%H:%M:%S').time()
+
     night_start = datetime.strptime('01:00:00', '%H:%M:%S').time()
     night_end = datetime.strptime('03:00:00', '%H:%M:%S').time()
 
@@ -33,6 +38,24 @@ def lambda_handler(event, context):
                     "g": 255,
                     "b": 0
                 }
+            }
+        }
+    elif event_time == morning_off_time:
+        payload = {
+            "device": device,
+            "model": model,
+            "cmd": {
+                "name": "turn",
+                "value": "off"
+            }
+        }
+    elif event_time == night_on_time:
+        payload = {
+            "device": device,
+            "model": model,
+            "cmd": {
+                "name": "turn",
+                "value": "on"
             }
         }
     elif night_start <= event_time <= night_end:
