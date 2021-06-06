@@ -2,10 +2,17 @@ import requests
 import json
 import os
 from datetime import datetime
+import get_time
 
 device = os.environ.get('GOVEE_DEVICE')
 api_key = os.environ.get('GOVEE_API_KEY')
 model = "H6003"
+
+
+def to_time(time):
+    return_time = datetime.strptime(time, '%H:%M:%S').time()
+
+    return return_time
 
 
 def lambda_handler(event, context):
@@ -14,16 +21,18 @@ def lambda_handler(event, context):
         'Govee-API-Key': api_key
     }
 
-    event_time = datetime.strptime(event['time'], '%Y-%m-%dT%H:%M:%SZ').time()
+    event_time = get_time.get_time(event['time'])
 
-    morning = datetime.strptime('12:30:00', '%H:%M:%S').time()
+    print('EVENT_TIME:', event_time)
 
-    morning_off_time = datetime.strptime('14:30:00', '%H:%M:%S').time()
+    morning = to_time('07:00:00')
 
-    night_on_time = datetime.strptime('00:00:00', '%H:%M:%S').time()
+    morning_off_time = to_time('08:30:00')
 
-    night_start = datetime.strptime('01:00:00', '%H:%M:%S').time()
-    night_end = datetime.strptime('03:00:00', '%H:%M:%S').time()
+    night_on_time = to_time('19:00:00')
+
+    night_start = to_time('20:00:00')
+    night_end = to_time('22:00:00')
 
     payload = {}
 

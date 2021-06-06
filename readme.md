@@ -18,7 +18,7 @@ zip -r ../manage-light-deployment-package.zip .
 
 cd ..
 
-zip -g manage-light-deployment-package.zip manage_light_function.py
+zip -g manage-light-deployment-package.zip manage_light_function.py get_time.py
 
 aws lambda update-function-code --function-name manageLight --zip-file fileb://manage-light-deployment-package.zip
 ```
@@ -28,5 +28,5 @@ aws lambda update-function-code --function-name manageLight --zip-file fileb://m
 ### Test locally
 
 `` 
-python-lambda-local -f manage_light_function.py event.json
+python-lambda-local manage_light_function.py -f lambda_handler event.json
 ``
