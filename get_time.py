@@ -9,7 +9,7 @@ def get_time(time):
 
     # Auto-detect time zones
     from_zone = tz.tzutc()
-    to_zone = tz.tzlocal()
+    to_zone = tz.gettz('America/Chicago')
 
     utc = datetime.strptime(string_date, '%Y-%m-%d %H:%M:%S')
 
