@@ -7,6 +7,12 @@ import get_time
 device = os.environ.get('GOVEE_DEVICE')
 api_key = os.environ.get('GOVEE_API_KEY')
 model = "H6003"
+control_url = "https://developer-api.govee.com/v1/devices/control"
+
+headers = {
+    'Content-Type': 'application/json',
+    'Govee-API-Key': api_key
+}
 
 
 def to_time(time):
@@ -16,11 +22,6 @@ def to_time(time):
 
 
 def lambda_handler(event, context):
-    headers = {
-        'Content-Type': 'application/json',
-        'Govee-API-Key': api_key
-    }
-
     event_time = get_time.get_time(event['time'])
 
     print('EVENT_TIME:', event_time)
@@ -82,8 +83,7 @@ def lambda_handler(event, context):
         }
 
     if payload:
-        control_url = "https://developer-api.govee.com/v1/devices/control"
-
+        print('payload', payload)
         response = requests.put(url=control_url, data=json.dumps(payload), headers=headers)
 
         data = response.json()
