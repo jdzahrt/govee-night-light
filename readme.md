@@ -18,7 +18,7 @@ zip -r ../manage-light-deployment-package.zip .
 
 cd ..
 
-zip -g manage-light-deployment-package.zip manage_light_function.py get_time.py
+zip -g  manage-light-deployment-package.zip manage_light_function.py get_time.py colors.py
 
 aws lambda update-function-code --function-name manageLight --zip-file fileb://manage-light-deployment-package.zip
 ```
