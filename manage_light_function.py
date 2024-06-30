@@ -45,12 +45,6 @@ def lambda_handler(event, context):
     if event_time == morning:
         payload.update({"cmd": {"name": "color", "value": colors.GREEN}})
 
-    elif event_time == morning_off_time:
-        payload.update({"cmd": {"name": "turn", "value": "off"}})
-
-    elif event_time == night_on_time:
-        payload.update({"cmd": {"name": "turn", "value": "on"}})
-
     elif night_start <= event_time <= night_end:
         payload.update({"cmd": {"name": "color", "value": colors.PINK}})
 
